@@ -2,7 +2,7 @@ import { useState } from 'react';
 import 'bulma/css/bulma.css';
 import './App.scss';
 import { goodsFromServer } from './api/goodsFromServer';
-import { SortType } from './types/enams';
+import { SortType } from './types/enums';
 
 export const App: React.FC = () => {
   const [sortField, setSortField] = useState<SortType>(SortType.Default);
