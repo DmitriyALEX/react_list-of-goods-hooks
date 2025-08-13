@@ -5,20 +5,20 @@ import { goodsFromServer } from './api/goodsFromServer';
 import { SortField } from './types/enams';
 
 export const App: React.FC = () => {
-  const [sortField, setSortField] = useState<SortField | ''>('');
+  const [sortField, setSortField] = useState<SortField>(SortField.Default);
   const [isReversed, setIsReversed] = useState<boolean>(false);
 
-  const getGoods = () => {
+  const handleGoods = () => {
     const sortedGoods: string[] = [...goodsFromServer];
 
-    if (sortField === SortField.ALPHA) {
+    if (sortField === SortField.Alphabet) {
       sortedGoods.sort((a, b) =>
         // eslint-disable-next-line prettier/prettier
         a.toLowerCase().localeCompare(b.toLowerCase()),
       );
     }
 
-    if (sortField === SortField.LENGTH) {
+    if (sortField === SortField.length) {
       sortedGoods.sort((a, b) => a.length - b.length);
     }
 
@@ -38,7 +38,7 @@ export const App: React.FC = () => {
             sortField === 'alpha' ? 'button is-info' : 'button is-info is-light'
           }
           onClick={() => {
-            setSortField(SortField.ALPHA);
+            setSortField(SortField.Alphabet);
           }}
         >
           Sort alphabetically
@@ -52,7 +52,7 @@ export const App: React.FC = () => {
               : 'button is-success is-light'
           }
           onClick={() => {
-            setSortField(SortField.LENGTH);
+            setSortField(SortField.length);
           }}
         >
           Sort by length
@@ -77,7 +77,7 @@ export const App: React.FC = () => {
                 : 'button is-danger is-light'
             }
             onClick={() => {
-              setSortField('');
+              setSortField(SortField.Default);
               setIsReversed(false);
             }}
           >
@@ -87,7 +87,7 @@ export const App: React.FC = () => {
       </div>
 
       <ul>
-        {getGoods().map(good => (
+        {handleGoods().map(good => (
           <li data-cy="Good" key={good}>
             {good}
           </li>

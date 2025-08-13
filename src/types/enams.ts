@@ -1,4 +1,5 @@
 export enum SortField {
-  ALPHA = 'alpha',
-  LENGTH = 'length',
+  Default = 'default',
+  Alphabet = 'alpha',
+  length = 'length',
 }
